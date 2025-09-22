@@ -21,14 +21,14 @@ end;
 
 #################### Section 2
 ##
-### for a given order calculate all the values of the J-function for groups of this order. Needed in Lemma 2.4
+### for a given order calculate all the values of the J-function for groups of this order. Needed in Lemma 2.3
 SetJFunctionOrder := function(n)
 local L, res;
 L := AllGroups(n);
 res := List(L, JFunction);
 return Set(res);
 end;
-List([8..15], SetJFunctionOrder);
+List([7..15], SetJFunctionOrder);
 
 ###### verifying Proposition 2.5 (only M11 here, rest in Mathematica)
 JFunction(MathieuGroup(11)) < 2;
