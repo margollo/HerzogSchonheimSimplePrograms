@@ -30,7 +30,10 @@ return Set(res);
 end;
 List([7..15], SetJFunctionOrder);
 
-###### verifying Proposition 2.5 (only M11 here, rest in Mathematica)
+##### verifying Corollary 2.5
+JFunction(AlternatingGroup(5)) = 103/60;
+
+###### verifying Proposition 2.7 (only M11 here, rest in Mathematica)
 JFunction(MathieuGroup(11)) < 2;
 
 
@@ -39,6 +42,7 @@ JFunction(MathieuGroup(11)) < 2;
 # small degree
 SnValues := List([3..13], x -> JFunction(SymmetricGroup(x)));; # this takes around 12 minutes 
 AnValues := List([3..13], x -> JFunction(AlternatingGroup(x)));; # this takes around 3 minutes
+## note that the n-th entry in the list corresponds to a group of degree n+2, so number are 2 smaller than in the statement of the proposition
 # varifying claim (a) for small degree
 List(SnValues{[1..4]}, x -> x <= 5/2);
 List(SnValues{[1..4]}, x -> x = 5/2);
@@ -47,7 +51,7 @@ List(SnValues{[5..11]}, x -> x < 2);
 List(AnValues{[1..6]}, x -> x <= 11/6);
 List(AnValues{[1..6]}, x -> x = 11/6);
 List(AnValues{[7..11]}, x -> x < 4/3);
-# the paragraph after equation (5), i.e. verifying the claims for 14 <= n <= 19
+# the paragraph after equation (4), i.e. verifying the claims for 14 <= n <= 19
 AnValues[11] < 111/100;
 # getting the orders of primitive subgroups of A_n for 14 <= n <= 19 exluding A_{n-1}. These are used afterwards in the Mathematica part
 OrdsPrimAn := function(n)
