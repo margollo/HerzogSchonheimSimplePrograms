@@ -49,8 +49,7 @@ List(AnValues{[1..6]}, x -> x = 11/6);
 List(AnValues{[7..11]}, x -> x < 4/3);
 # the paragraph after equation (5), i.e. verifying the claims for 14 <= n <= 19
 AnValues[11] < 111/100;
-SnValues[11] < 166/100;
-# getting the orders of primitive subgroups of A_n and S_n for 14 <= n <= 19 exluding A_{n-1} or S_{n-1} and A_n. These are used afterwards in the Mathematica part
+# getting the orders of primitive subgroups of A_n for 14 <= n <= 19 exluding A_{n-1}. These are used afterwards in the Mathematica part
 OrdsPrimAn := function(n)
 local res, L, H;
 res := [ ];
@@ -62,32 +61,14 @@ for H in L do
 od;
 return Set(res);
 end;
-
-OrdsPrimSn := function(n)
-local res, L, H;
-res := [ ];
-L := AllPrimitiveGroups(DegreeOperation, n);
-for H in L do
-  if Order(H) <> Order(AlternatingGroup(n)) and Order(H) <> Order(SymmetricGroup(n)) then
-    Add(res, Order(H));
-  fi;
-od;
-return Set(res);
-end;
 ###
-# Claim after Equation (8)
+# Claim after Equation (7)
 SPlusWnByAn := function(n)
 local G;
 G := AlternatingGroup(n);
 return ( Sum(OrdsPrimAn(n)) + Order(G)*( (3*n/n^3) + (1/Binomial(n,2)) + (1/Binomial(n,3)) ) )/Order(G);
 end;
 List([20..43], n -> SPlusWnByAn(n) <= n^2/10); # for alternating groups
-SPlusWnBySn := function(n)
-local G;
-G := SymmetricGroup(n);
-return ( Sum(OrdsPrimSn(n)) + Order(G)*( (3*n/n^3) + (1/Binomial(n,2)) + (1/Binomial(n,3)) ) )/Order(G);
-end;
-List([20..44], n -> SPlusWnBySn(n) <= n^2/10); # for symmetric groups
 ########################################################
 ########## Section 4
 #######################################
